@@ -1,0 +1,13 @@
+import Data.List
+
+bucketSort :: [Double] -> [Double]
+bucketSort arr = concatMap sort buckets
+  where
+    bucketSize = 5
+    buckets = groupBy (\x y -> floor (x * fromIntegral bucketSize) == floor (y * fromIntegral bucketSize)) $ sort arr
+
+main :: IO ()
+main = do
+  let arr = [0.42, 0.32, 0.33, 0.52, 0.37, 0.47, 0.51]
+  let result = bucketSort arr
+  print result

@@ -1,0 +1,14 @@
+insertionSort :: (Ord a) => [a] -> [a]
+insertionSort [] = []
+insertionSort (x:xs) = insert x (insertionSort xs)
+  where
+    insert x [] = [x]
+    insert x (y:ys)
+        | x <= y = x : y : ys
+        | otherwise = y : insert x ys
+
+main :: IO ()
+main = do
+    let arr = [64, 25, 12, 22, 11]
+    let result = insertionSort arr
+    print result

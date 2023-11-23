@@ -1,0 +1,13 @@
+bubbleSort :: (Ord a) => [a] -> [a]
+bubbleSort xs = foldr bubble [] xs
+  where
+    bubble x [] = [x]
+    bubble x (y:ys)
+        | x > y = y : bubble x ys
+        | otherwise = x : y : ys
+
+main :: IO ()
+main = do
+    let arr = [64, 25, 12, 22, 11]
+    let result = bubbleSort arr
+    print result

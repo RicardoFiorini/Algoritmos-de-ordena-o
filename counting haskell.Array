@@ -1,0 +1,14 @@
+import Data.Array
+
+countingSort :: [Int] -> [Int]
+countingSort arr = elems sortedArray
+  where
+    maxVal = maximum arr
+    countArray = accumArray (+) 0 (0, maxVal) [(num, 1) | num <- arr]
+    sortedArray = accumArray (\count num -> count - 1) countArray (0, maxVal) [(num, sortedArray ! (countArray ! num)) | num <- arr]
+
+main :: IO ()
+main = do
+  let arr = [4, 2, 4, 1, 0, 2, 1]
+  let result = countingSort arr
+  print result

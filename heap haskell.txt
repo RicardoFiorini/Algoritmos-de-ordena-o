@@ -1,0 +1,21 @@
+heapSort :: (Ord a) => [a] -> [a]
+heapSort arr = heapify (buildHeap arr) (length arr)
+  where
+    buildHeap [] = []
+    buildHeap xs = heapify (head xs : buildHeap (tail xs)) (length xs)
+
+heapify :: (Ord a) => [a] -> Int -> [a]
+heapify arr n
+    | n <= 1 = arr
+    | otherwise = heapify (insert (head arr) (init (tail arr))) (n - 1)
+  where
+    insert x [] = [x]
+    insert x (y : ys)
+        | x <= y = x : y : ys
+        | otherwise = y : insert x ys
+
+main :: IO ()
+main = do
+  let arr = [4, 10, 3, 5, 1]
+  let result = heapSort arr
+  print result

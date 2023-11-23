@@ -1,0 +1,16 @@
+selectionSort :: (Ord a) => [a] -> [a]
+selectionSort [] = []
+selectionSort xs = let
+    minIndex = ifoldl (\idx minIdx x y -> if y < x then idx else minIdx) 0 xs
+    minElem = xs !! minIndex
+    rest = take minIndex xs ++ drop (minIndex + 1) xs
+  in minElem : selectionSort rest
+
+ifoldl :: (Int -> b -> a -> b) -> b -> [a] -> b
+ifoldl f acc xs = foldl (\acc' (idx, x) -> f idx acc' x) acc (zip [0..] xs)
+
+main :: IO ()
+main = do
+    let arr = [64, 25, 12, 22, 11]
+    let result = selectionSort arr
+    print result

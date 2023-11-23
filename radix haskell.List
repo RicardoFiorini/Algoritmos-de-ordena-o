@@ -1,0 +1,12 @@
+import Data.List
+
+radixSort :: [Int] -> [Int]
+radixSort arr = foldl' (\acc i -> sortBy (\x y -> compare ((x `div` 10^i) `mod` 10) ((y `div` 10^i) `mod` 10)) acc) arr [0 .. maxDigit - 1]
+  where
+    maxDigit = maximum $ map (length . show) arr
+
+main :: IO ()
+main = do
+  let arr = [170, 45, 75, 90, 802, 24, 2, 66]
+  let result = radixSort arr
+  print result
